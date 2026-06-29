@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Your NOVA profile — status, bio and account settings.">
+  <meta name="theme-color" content="#0F172A">
+  <title>Profile — NOVA</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="components.css">
+  <link rel="stylesheet" href="responsive.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%236366F1'/%3E%3Cpath d='M20 44V20l24 24V20' stroke='white' stroke-width='6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+
+  <script src="theme.js"></script>
+</head>
+<body id="profilePage">
+  <div class="orbs" aria-hidden="true">
+    <span class="orb orb-1"></span><span class="orb orb-2"></span>
+  </div>
+
+  <main class="profile-main">
+    <!-- top bar -->
+    <nav class="flex items-center justify-between" style="margin-bottom:20px" aria-label="Profile navigation">
+      <a class="btn btn-secondary btn-sm" href="../index.html">
+        <svg class="ic ic-sm" aria-hidden="true"><use href="#i-arrow-left"></use></svg>
+        Back to workspace
+      </a>
+      <div class="flex items-center gap-sm">
+        <a class="icon-btn bordered" href="app.js" data-tip="Dashboard" aria-label="Open dashboard">
+          <svg class="ic" aria-hidden="true"><use href="#i-chart"></use></svg>
+        </a>
+        <button class="icon-btn bordered" data-action="toggle-theme" aria-label="Toggle theme">
+          <svg class="ic" aria-hidden="true"><use href="#i-sun"></use></svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Cover + identity -->
+    <section aria-label="Profile header">
+      <div class="profile-cover">
+        <span class="cover-pattern" aria-hidden="true"></span>
+        <button class="btn btn-sm cover-edit glass" data-demo="Change cover image" style="color:#fff">
+          <svg class="ic ic-sm" aria-hidden="true"><use href="#i-camera"></use></svg>
+          Change cover
+        </button>
+      </div>
+
+      <div class="profile-head">
+        <div class="profile-avatar-xl">
+          <span id="profileAvatar"><span class="avatar avatar-xl" data-c="0">AC</span></span>
+          <span class="status-ring" aria-label="Status: online"></span>
+        </div>
+        <div class="profile-id">
+          <h1><span id="profileName">Alex Carter</span>
+            <span class="role-chip mod">Pro</span>
+          </h1>
+          <p class="handle"><span id="profileHandle">@alexcarter</span> · Product Designer · San Francisco, CA</p>
+        </div>
+        <div class="profile-head-actions">
+          <button class="btn btn-primary" data-modal-open="modalEditProfile">
+            <svg class="ic" aria-hidden="true"><use href="#i-edit"></use></svg>
+            Edit profile
+          </button>
+          <button class="btn btn-secondary" data-demo="Share profile link copied">
+            <svg class="ic" aria-hidden="true"><use href="#i-link"></use></svg>
+            Share
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <div class="profile-grid">
+      <!-- ───────── Left column ───────── -->
+      <div class="flex flex-col gap-md">
+        <section class="panel-card" aria-labelledby="bioTitle">
+          <div class="panel-card-head"><h3 id="bioTitle">About</h3></div>
+          <p class="text-2" id="profileBio" style="font-size:var(--fs-md);line-height:1.65">
+            Designing delightful collaboration experiences.
+          </p>
+          <div style="margin-top:18px;padding-top:16px;border-top:1px solid var(--border)">
+            <div class="profile-stats-row">
+              <div><strong class="text-gradient">3,119</strong><small>Messages</small></div>
+              <div><strong class="text-gradient">12</strong><small>Channels</small></div>
+              <div><strong class="text-gradient">248</strong><small>Files shared</small></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel-card" aria-labelledby="statusTitle">
+          <div class="panel-card-head">
+            <div><h3 id="statusTitle">Set your status</h3><p>Visible to everyone in your workspace</p></div>
+          </div>
+          <div class="flex flex-col gap-xs">
+            <button class="status-option" data-status="online" aria-pressed="false">
+              <span class="presence online" style="position:static;border:none;width:12px;height:12px"></span>
+              <span>Active</span>
+              <span class="check"><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg></span>
+            </button>
+            <button class="status-option" data-status="away" aria-pressed="false">
+              <span class="presence away" style="position:static;border:none;width:12px;height:12px"></span>
+              <span>Away</span>
+              <span class="check"><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg></span>
+            </button>
+            <button class="status-option" data-status="dnd" aria-pressed="false">
+              <span class="presence dnd" style="position:static;border:none;width:12px;height:12px"></span>
+              <span>Do not disturb</span>
+              <span class="check"><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg></span>
+            </button>
+            <button class="status-option" data-status="offline" aria-pressed="false">
+              <span class="presence offline" style="position:static;border:none;width:12px;height:12px"></span>
+              <span>Appear offline</span>
+              <span class="check"><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg></span>
+            </button>
+          </div>
+        </section>
+
+        <section class="panel-card" aria-labelledby="badgeTitle">
+          <div class="panel-card-head"><h3 id="badgeTitle">Achievements</h3></div>
+          <div class="flex" style="flex-wrap:wrap;gap:8px">
+            <span class="chip active"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-zap"></use></svg> Early adopter</span>
+            <span class="chip"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-star"></use></svg> Top contributor</span>
+            <span class="chip"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-message"></use></svg> 1k messages</span>
+            <span class="chip"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-users"></use></svg> Team builder</span>
+            <span class="chip"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-trending"></use></svg> Streak ×30</span>
+          </div>
+        </section>
+      </div>
+
+      <!-- ───────── Right column: settings ───────── -->
+      <div class="flex flex-col gap-md">
+        <section class="panel-card" aria-labelledby="prefTitle">
+          <div class="panel-card-head">
+            <div><h3 id="prefTitle">Notifications &amp; preferences</h3><p>Saved automatically to this device</p></div>
+          </div>
+
+          <div class="settings-row">
+            <span class="s-icon"><svg class="ic" aria-hidden="true"><use href="#i-bell"></use></svg></span>
+            <div class="s-meta"><strong>Desktop notifications</strong><small>Get notified about mentions and DMs</small></div>
+            <label class="switch"><input type="checkbox" data-pref="notif" data-label="Desktop notifications" checked><span class="track"></span></label>
+          </div>
+          <div class="settings-row">
+            <span class="s-icon"><svg class="ic" aria-hidden="true"><use href="#i-volume"></use></svg></span>
+            <div class="s-meta"><strong>Message sounds</strong><small>Play a sound for incoming messages</small></div>
+            <label class="switch"><input type="checkbox" data-pref="sounds" data-label="Message sounds" checked><span class="track"></span></label>
+          </div>
+          <div class="settings-row">
+            <span class="s-icon"><svg class="ic" aria-hidden="true"><use href="#i-moon"></use></svg></span>
+            <div class="s-meta"><strong>Do not disturb schedule</strong><small>Silence notifications 22:00 – 08:00</small></div>
+            <label class="switch"><input type="checkbox" data-pref="dnd" data-label="DND schedule"><span class="track"></span></label>
+          </div>
+          <div class="settings-row">
+            <span class="s-icon"><svg class="ic" aria-hidden="true"><use href="#i-checks"></use></svg></span>
+            <div class="s-meta"><strong>Read receipts</strong><small>Let others see when you’ve read messages</small></div>
+            <label class="switch"><input type="checkbox" data-pref="read" data-label="Read receipts" checked><span class="track"></span></label>
+          </div>
+        </section>
+
+        <section class="panel-card" aria-labelledby="accTitle">
+          <div class="panel-card-head"><h3 id="accTitle">Account &amp; security</h3></div>
+
+          <div class="settings-row">
+            <span class="s-icon"><svg class="ic" aria-hidden="true"><use href="#i-mail"></use></svg></span>
+            <div class="s-meta"><strong>Email address</strong><small>alex.carter@nova.app</small></div>
+            <button class="btn btn-ghost btn-sm" data-demo="Change email">Change</button>
+          </div>
+          <div class="settings-row">
+            <span class="s-icon"><svg class="ic" aria-hidden="true"><use href="#i-lock"></use></svg></span>
+            <div class="s-meta"><strong>Password</strong><small>Last changed 3 months ago</small></div>
+            <button class="btn btn-ghost btn-sm" data-demo="Change password">Update</button>
+          </div>
+          <div class="settings-row">
+            <span class="s-icon"><svg class="ic" aria-hidden="true"><use href="#i-shield"></use></svg></span>
+            <div class="s-meta"><strong>Two-factor authentication</strong><small>Recommended — protect your account</small></div>
+            <button class="btn btn-outline btn-sm" data-demo="2FA setup">Enable</button>
+          </div>
+          <div class="settings-row">
+            <span class="s-icon" style="background:rgba(239,68,68,.12);color:var(--danger)"><svg class="ic" aria-hidden="true"><use href="#i-logout"></use></svg></span>
+            <div class="s-meta"><strong>Sign out everywhere</strong><small>Log out of all active sessions</small></div>
+            <button class="btn btn-danger btn-sm" data-action="logout">Sign out</button>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <!-- Edit profile modal -->
+  <div class="modal-overlay" id="modalEditProfile" role="dialog" aria-modal="true" aria-labelledby="epTitle" aria-hidden="true">
+    <div class="modal">
+      <div class="modal-head">
+        <h3 id="epTitle">Edit profile</h3>
+        <button class="icon-btn" data-modal-close aria-label="Close dialog">
+          <svg class="ic" aria-hidden="true"><use href="#i-x"></use></svg>
+        </button>
+      </div>
+      <form id="editProfileForm">
+        <div class="modal-body">
+          <div class="field">
+            <label for="editName">Full name</label>
+            <div class="input-wrap">
+              <svg class="ic" aria-hidden="true"><use href="#i-user"></use></svg>
+              <input class="input" id="editName" type="text" maxlength="40">
+            </div>
+          </div>
+          <div class="field">
+            <label for="editUsername">Username</label>
+            <div class="input-wrap">
+              <svg class="ic" aria-hidden="true"><use href="#i-at"></use></svg>
+              <input class="input" id="editUsername" type="text" maxlength="20">
+            </div>
+          </div>
+          <div class="field">
+            <label for="editBio">Bio</label>
+            <textarea class="input" id="editBio" maxlength="220" placeholder="Tell your team a little about yourself…"></textarea>
+          </div>
+        </div>
+        <div class="modal-foot">
+          <button type="button" class="btn btn-secondary" data-modal-close>Cancel</button>
+          <button type="submit" class="btn btn-primary">
+            <svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg>
+            Save changes
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="icons.js"></script>
+  <script src="app.js"></script>
+  <script src="auth.js"></script>
+</body>
+</html>

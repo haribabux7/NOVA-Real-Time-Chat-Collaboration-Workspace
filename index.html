@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NOVA — a real-time chat & collaboration workspace. Channels, direct messages, file sharing and more.">
+  <meta name="theme-color" content="#0F172A">
+  <title>NOVA — Workspace · Real-Time Chat &amp; Collaboration</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="./files/style.css">
+  <link rel="stylesheet" href="./files/components.css">
+  <link rel="stylesheet" href="./files/responsive.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%236366F1'/%3E%3Cpath d='M20 44V20l24 24V20' stroke='white' stroke-width='6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+
+  <script src="./files/theme.js"></script>
+</head>
+<body>
+  <div class="app-shell" id="appShell">
+
+    <!-- ════════════════════ WORKSPACE RAIL ════════════════════ -->
+    <nav class="rail" aria-label="Workspaces">
+      <a class="rail-logo" href="index.html" aria-label="NOVA home">
+        <svg class="ic ic-lg" aria-hidden="true"><use href="#i-zap"></use></svg>
+      </a>
+      <span class="rail-sep" role="separator"></span>
+      <button class="rail-item active" data-tip-right data-tip="NOVA HQ" aria-label="NOVA HQ workspace">NV</button>
+      <button class="rail-item" data-tip-right data-tip="Design Guild" data-demo="Switching to Design Guild" aria-label="Design Guild workspace">DG<span class="badge-dot" aria-hidden="true"></span></button>
+      <button class="rail-item" data-tip-right data-tip="Open Source" data-demo="Switching to Open Source" aria-label="Open Source workspace">OS</button>
+      <button class="rail-item rail-add" data-tip-right data-tip="Add workspace" data-demo="Create a new workspace" aria-label="Add a workspace">
+        <svg class="ic" aria-hidden="true"><use href="#i-plus"></use></svg>
+      </button>
+      <span class="rail-spacer"></span>
+      <a class="rail-item" href="./files/dashboard.html" data-tip-right data-tip="Dashboard" aria-label="Open dashboard">
+        <svg class="ic" aria-hidden="true"><use href="#i-chart"></use></svg>
+      </a>
+      <button class="rail-item" data-action="toggle-theme" data-tip-right data-tip="Theme" aria-label="Toggle theme">
+        <svg class="ic" aria-hidden="true"><use href="#i-sun"></use></svg>
+      </button>
+    </nav>
+
+    <!-- ════════════════════ SIDEBAR ════════════════════ -->
+    <aside class="sidebar" id="sidebar" aria-label="Channels and direct messages">
+      <header class="sidebar-head">
+        <div class="workspace-name">
+          <h1>NOVA HQ
+            <span class="verified" data-tip="Verified workspace">
+              <svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg>
+            </span>
+          </h1>
+          <div class="dropdown">
+            <button class="icon-btn" data-dropdown aria-haspopup="true" aria-expanded="false" aria-label="Workspace options">
+              <svg class="ic" aria-hidden="true"><use href="#i-chevron-down"></use></svg>
+            </button>
+            <div class="dropdown-menu">
+              <div class="dropdown-head">NOVA HQ</div>
+              <button class="dropdown-item" data-demo="Invite teammates"><svg class="ic" aria-hidden="true"><use href="#i-users"></use></svg> Invite people</button>
+              <button class="dropdown-item" data-modal-open="modalNewChannel"><svg class="ic" aria-hidden="true"><use href="#i-plus"></use></svg> Create channel</button>
+              <button class="dropdown-item" data-demo="Workspace settings"><svg class="ic" aria-hidden="true"><use href="#i-settings"></use></svg> Workspace settings</button>
+              <div class="dropdown-sep" role="separator"></div>
+              <button class="dropdown-item danger" data-demo="Leave workspace"><svg class="ic" aria-hidden="true"><use href="#i-logout"></use></svg> Leave workspace</button>
+            </div>
+          </div>
+        </div>
+        <div class="input-wrap">
+          <svg class="ic" aria-hidden="true"><use href="#i-search"></use></svg>
+          <input type="search" class="input input-search" id="sidebarSearch" placeholder="Search… (Ctrl K)" aria-label="Search channels and people">
+        </div>
+      </header>
+
+      <div class="sidebar-body">
+        <section class="nav-section" aria-label="Channels">
+          <div class="nav-section-head">
+            <button class="flex items-center gap-xs" data-collapse-section aria-expanded="true">
+              <span class="section-toggle"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-chevron-down"></use></svg></span>
+              <h2>Channels</h2>
+            </button>
+            <button class="icon-btn" style="width:26px;height:26px" data-modal-open="modalNewChannel" data-tip="New channel" aria-label="Create a new channel">
+              <svg class="ic ic-sm" aria-hidden="true"><use href="#i-plus"></use></svg>
+            </button>
+          </div>
+          <ul class="nav-list" id="channelList"></ul>
+        </section>
+
+        <section class="nav-section" aria-label="Direct messages">
+          <div class="nav-section-head">
+            <button class="flex items-center gap-xs" data-collapse-section aria-expanded="true">
+              <span class="section-toggle"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-chevron-down"></use></svg></span>
+              <h2>Direct Messages</h2>
+            </button>
+            <button class="icon-btn" style="width:26px;height:26px" data-demo="Start a new conversation" data-tip="New message" aria-label="Start a new direct message">
+              <svg class="ic ic-sm" aria-hidden="true"><use href="#i-plus"></use></svg>
+            </button>
+          </div>
+          <ul class="nav-list" id="dmList"></ul>
+        </section>
+      </div>
+
+      <footer class="sidebar-foot">
+        <div class="me-card">
+          <span data-me="avatar" data-presence="online"></span>
+          <a class="me-info" href="./files/profile.html" aria-label="Open your profile">
+            <span class="me-name" data-me="name">Alex Carter</span>
+            <span class="me-status">Building in public 🚀</span>
+          </a>
+          <div class="me-actions">
+            <a class="icon-btn" href="./files/profile.html" data-tip="Profile &amp; settings" aria-label="Profile and settings">
+              <svg class="ic" aria-hidden="true"><use href="#i-settings"></use></svg>
+            </a>
+            <button class="icon-btn" data-action="logout" data-tip="Sign out" aria-label="Sign out">
+              <svg class="ic" aria-hidden="true"><use href="./files/logout.html"></use></svg>
+            </button>
+          </div>
+        </div>
+      </footer>
+    </aside>
+
+    <!-- ════════════════════ MAIN CHAT ════════════════════ -->
+    <main class="chat-area" aria-label="Conversation">
+      <header class="chat-header">
+        <button class="icon-btn mobile-only" id="mobileNavBtn" aria-label="Open navigation">
+          <svg class="ic ic-lg" aria-hidden="true"><use href="#i-menu"></use></svg>
+        </button>
+        <button class="icon-btn" id="sidebarToggle" data-tip="Toggle sidebar" aria-label="Collapse or expand sidebar">
+          <svg class="ic" aria-hidden="true"><use href="#i-chevron-left"></use></svg>
+        </button>
+
+        <div class="chat-title">
+          <span class="ch-symbol" id="chatSymbol"><svg class="ic" aria-hidden="true"><use href="#i-hash"></use></svg></span>
+          <div class="chat-title-text">
+            <h2 id="chatTitle">general</h2>
+            <p id="chatDesc">Company-wide announcements and chat</p>
+          </div>
+        </div>
+
+        <div class="chat-header-actions">
+          <span class="member-count" id="memberCount">
+            <svg class="ic ic-sm" aria-hidden="true"><use href="#i-users"></use></svg>
+            <span class="mc-label">48 members</span>
+          </span>
+
+          <div class="input-wrap msg-search">
+            <svg class="ic" aria-hidden="true"><use href="#i-search"></use></svg>
+            <input type="search" class="input input-search" id="msgSearch" placeholder="Search messages" aria-label="Search messages in this conversation">
+          </div>
+
+          <button class="icon-btn hide-sm" id="voiceCallBtn" data-tip="Voice call" aria-label="Start voice call">
+            <svg class="ic" aria-hidden="true"><use href="#i-phone"></use></svg>
+          </button>
+          <button class="icon-btn hide-sm" id="videoCallBtn" data-tip="Video call" aria-label="Start video call">
+            <svg class="ic" aria-hidden="true"><use href="#i-video"></use></svg>
+          </button>
+
+          <!-- Notifications -->
+          <div class="dropdown">
+            <button class="icon-btn" data-dropdown data-tip="Notifications" aria-label="Notifications" aria-haspopup="true" aria-expanded="false">
+              <svg class="ic" aria-hidden="true"><use href="#i-bell"></use></svg>
+              <span class="badge red" id="notifBadge" style="position:absolute;top:2px;right:0">3</span>
+            </button>
+            <div class="dropdown-menu notif-menu">
+              <div class="notif-menu-head">
+                <h4>Notifications</h4>
+                <button type="button" onclick="document.querySelectorAll('.notif-item').forEach(n=>n.classList.remove('unread'));document.getElementById('notifBadge').classList.add('hidden');Toast.success('All caught up','Notifications marked as read')">Mark all read</button>
+              </div>
+              <div class="notif-list">
+                <div class="notif-item unread">
+                  <span class="avatar avatar-sm" data-c="0" aria-hidden="true">MP</span>
+                  <div><p><strong>Maya Patel</strong> mentioned you in <strong>#launch-day</strong>: “@alex can you own the demo?”</p><time>12 min ago</time></div>
+                </div>
+                <div class="notif-item unread">
+                  <span class="avatar avatar-sm" data-c="2" aria-hidden="true">LF</span>
+                  <div><p><strong>Leo Fischer</strong> reacted 🔥 to your message in <strong>#design-system</strong></p><time>48 min ago</time></div>
+                </div>
+                <div class="notif-item unread">
+                  <span class="avatar avatar-sm" data-c="4" aria-hidden="true">ZA</span>
+                  <div><p><strong>Zara Ahmed</strong> sent you a direct message</p><time>1 h ago</time></div>
+                </div>
+                <div class="notif-item">
+                  <span class="avatar avatar-sm" data-c="3" aria-hidden="true">SR</span>
+                  <div><p><strong>Sofia Reyes</strong> added you to <strong>#launch-day</strong></p><time>Yesterday</time></div>
+                </div>
+                <div class="notif-item">
+                  <span class="avatar avatar-sm" data-c="6" aria-hidden="true">KW</span>
+                  <div><p><strong>Kenji Watanabe</strong> shared <strong>perf-benchmarks-q3.pdf</strong> in <strong>#engineering</strong></p><time>Yesterday</time></div>
+                </div>
+              </div>
+              <div class="notif-menu-foot"><a href="./files/dashboard.html">View all activity</a></div>
+            </div>
+          </div>
+
+          <button class="icon-btn" id="panelToggle" data-tip="Details" aria-label="Toggle details panel">
+            <svg class="ic" aria-hidden="true"><use href="#i-info"></use></svg>
+          </button>
+
+          <!-- More options -->
+          <div class="dropdown">
+            <button class="icon-btn" data-dropdown data-tip="More" aria-label="More options" aria-haspopup="true" aria-expanded="false">
+              <svg class="ic" aria-hidden="true"><use href="#i-more-v"></use></svg>
+            </button>
+            <div class="dropdown-menu">
+              <button class="dropdown-item" data-demo="Notification preferences"><svg class="ic" aria-hidden="true"><use href="#i-bell"></use></svg> Mute channel <span class="shortcut">⌘M</span></button>
+              <button class="dropdown-item" data-demo="Viewing pinned messages"><svg class="ic" aria-hidden="true"><use href="#i-pin"></use></svg> Pinned messages</button>
+              <button class="dropdown-item" data-demo="Opening shared files"><svg class="ic" aria-hidden="true"><use href="#i-folder"></use></svg> Shared files</button>
+              <button class="dropdown-item" data-demo="Copy link copied"><svg class="ic" aria-hidden="true"><use href="#i-link"></use></svg> Copy link</button>
+              <div class="dropdown-sep" role="separator"></div>
+              <button class="dropdown-item danger" data-demo="Leave channel"><svg class="ic" aria-hidden="true"><use href="#i-logout"></use></svg> Leave channel</button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Pinned banner -->
+      <div class="pinned-bar hidden" id="pinnedBar">
+        <svg class="ic" aria-hidden="true"><use href="#i-pin"></use></svg>
+        <span class="pin-text truncate grow"></span>
+        <button class="pin-close" aria-label="Dismiss pinned message"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-x"></use></svg></button>
+      </div>
+
+      <!-- Messages -->
+      <div class="chat-window" id="chatWindow" role="log" aria-live="polite" aria-label="Message history">
+        <div class="typing-row hidden" id="typingRow">
+          <span class="typing-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+          <span><strong class="typing-name">Maya</strong> is typing…</span>
+        </div>
+      </div>
+
+      <button class="scroll-fab" id="scrollFab" aria-label="Scroll to latest messages">
+        <svg class="ic" aria-hidden="true"><use href="#i-chevron-down"></use></svg>
+        <span class="fab-count hidden">1</span>
+      </button>
+
+      <!-- Composer -->
+      <div class="composer-wrap">
+        <div class="reply-banner hidden" id="replyBanner">
+          <svg class="ic" aria-hidden="true"><use href="#i-reply"></use></svg>
+          <span class="rb-text"></span>
+          <button class="rb-close" aria-label="Cancel reply"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-x"></use></svg></button>
+        </div>
+
+        <div class="emoji-picker" id="emojiPicker" role="dialog" aria-label="Emoji picker">
+          <div class="emoji-picker-head">Frequently used</div>
+          <div class="emoji-grid"></div>
+        </div>
+
+        <div class="composer">
+          <button class="composer-btn" id="emojiBtn" data-tip="Emoji" aria-label="Open emoji picker">
+            <svg class="ic ic-lg" aria-hidden="true"><use href="#i-smile"></use></svg>
+          </button>
+          <button class="composer-btn" id="attachBtn" data-tip="Attach file" aria-label="Attach a file">
+            <svg class="ic ic-lg" aria-hidden="true"><use href="#i-paperclip"></use></svg>
+          </button>
+          <input type="file" id="fileInput" class="sr-only" aria-hidden="true" tabindex="-1">
+          <label class="sr-only" for="composerInput">Type a message</label>
+          <textarea class="composer-input" id="composerInput" rows="1" placeholder="Message #general"></textarea>
+          <button class="composer-btn" id="micBtn" data-tip="Voice message" aria-label="Record voice message" aria-pressed="false">
+            <svg class="ic ic-lg" aria-hidden="true"><use href="#i-mic"></use></svg>
+          </button>
+          <button class="send-btn" id="sendBtn" disabled aria-label="Send message">
+            <svg class="ic" aria-hidden="true"><use href="#i-send"></use></svg>
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- ════════════════════ INFO PANEL ════════════════════ -->
+    <aside class="info-panel" id="infoPanel" aria-label="Conversation details">
+      <header class="info-panel-head">
+        <h3>Details</h3>
+        <button class="icon-btn" id="panelClose" aria-label="Close details panel">
+          <svg class="ic" aria-hidden="true"><use href="#i-x"></use></svg>
+        </button>
+      </header>
+      <div class="info-panel-body">
+        <section class="info-section">
+          <div class="info-section-head"><h4>About</h4></div>
+          <div class="about-card">
+            The home for product, design &amp; engineering collaboration. Be kind, stay curious, ship great work. ✨
+            <ul class="about-meta">
+              <li><svg class="ic" aria-hidden="true"><use href="#i-calendar"></use></svg> Created Jan 12, 2024</li>
+              <li><svg class="ic" aria-hidden="true"><use href="#i-globe"></use></svg> Public channel</li>
+              <li><svg class="ic" aria-hidden="true"><use href="#i-bell"></use></svg> Notifications: All messages</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="info-section">
+          <div class="info-section-head"><h4>Members — Online</h4><a href="#" data-demo="Viewing all members">See all</a></div>
+          <ul id="panelMembers"></ul>
+        </section>
+
+        <section class="info-section">
+          <div class="info-section-head"><h4>Shared Media</h4><a href="#" data-demo="Opening media gallery">View all</a></div>
+          <div class="media-grid" id="panelMedia"></div>
+        </section>
+
+        <section class="info-section">
+          <div class="info-section-head"><h4>Pinned Messages</h4></div>
+          <div id="panelPins"></div>
+        </section>
+
+        <section class="info-section">
+          <div class="info-section-head"><h4>Shared Files</h4><a href="#" data-demo="Opening file browser">View all</a></div>
+          <div id="panelFiles"></div>
+        </section>
+      </div>
+    </aside>
+  </div>
+
+  <div class="backdrop" id="backdrop" aria-hidden="true"></div>
+
+  <!-- ════════════════════ NEW CHANNEL MODAL ════════════════════ -->
+  <div class="modal-overlay" id="modalNewChannel" role="dialog" aria-modal="true" aria-labelledby="ncTitle" aria-hidden="true">
+    <div class="modal">
+      <div class="modal-head">
+        <h3 id="ncTitle">Create a channel</h3>
+        <button class="icon-btn" data-modal-close aria-label="Close dialog">
+          <svg class="ic" aria-hidden="true"><use href="#i-x"></use></svg>
+        </button>
+      </div>
+      <form id="createChannelForm">
+        <div class="modal-body">
+          <p class="muted">Channels are where your team communicates. They’re best organised around a topic — <strong>#marketing</strong>, for example.</p>
+          <div class="field">
+            <label for="newChannelName">Channel name <span class="req">*</span></label>
+            <div class="input-wrap">
+              <svg class="ic" aria-hidden="true"><use href="#i-hash"></use></svg>
+              <input class="input" id="newChannelName" type="text" maxlength="24" placeholder="e.g. product-updates" required>
+            </div>
+          </div>
+          <div class="field">
+            <label for="newChannelDesc">Description</label>
+            <input class="input" id="newChannelDesc" type="text" maxlength="80" placeholder="What is this channel about?">
+          </div>
+          <label class="checkbox">
+            <input type="checkbox">
+            <span class="box"><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg></span>
+            <span>Make private — only invited members can view <svg class="ic ic-sm" style="vertical-align:-2px" aria-hidden="true"><use href="#i-lock"></use></svg></span>
+          </label>
+        </div>
+        <div class="modal-foot">
+          <button type="button" class="btn btn-secondary" data-modal-close>Cancel</button>
+          <button type="submit" class="btn btn-primary">
+            <svg class="ic" aria-hidden="true"><use href="#i-plus"></use></svg> Create channel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="./files/icons.js"></script>
+  <script src="./files/app.js"></script>
+  <script src="./files/chat.js"></script>
+</body>
+</html>

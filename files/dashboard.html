@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NOVA admin dashboard — workspace analytics, user management and file sharing.">
+  <meta name="theme-color" content="#0F172A">
+  <title>Dashboard — NOVA Analytics</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="components.css">
+  <link rel="stylesheet" href="responsive.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%236366F1'/%3E%3Cpath d='M20 44V20l24 24V20' stroke='white' stroke-width='6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+
+  <script src="theme.js"></script>
+</head>
+<body>
+  <div class="dash-shell" id="dashShell">
+
+    <!-- ════════ SIDE NAV ════════ -->
+    <nav class="dash-nav" aria-label="Dashboard navigation">
+      <a class="auth-logo" href="../index.html">
+        <span class="logo-mark"><svg class="ic ic-lg" aria-hidden="true"><use href="#i-zap"></use></svg></span>
+        NOVA
+      </a>
+
+      <div class="dash-nav-list">
+        <button class="dash-nav-item active" data-section="overviewSection">
+          <svg class="ic" aria-hidden="true"><use href="#i-home"></use></svg> Overview
+        </button>
+        <button class="dash-nav-item" data-section="chartsSection">
+          <svg class="ic" aria-hidden="true"><use href="#i-chart"></use></svg> Analytics
+        </button>
+        <button class="dash-nav-item" data-section="usersSection">
+          <svg class="ic" aria-hidden="true"><use href="#i-users"></use></svg> Members
+          <span class="nav-badge">8</span>
+        </button>
+        <button class="dash-nav-item" data-section="filesSection">
+          <svg class="ic" aria-hidden="true"><use href="#i-folder"></use></svg> Files
+        </button>
+        <a class="dash-nav-item" href="index.html">
+          <svg class="ic" aria-hidden="true"><use href="#i-message"></use></svg> Back to chat
+        </a>
+        <a class="dash-nav-item" href="profile.html">
+          <svg class="ic" aria-hidden="true"><use href="#i-settings"></use></svg> Settings
+        </a>
+      </div>
+
+      <div class="me-card" style="margin-top:14px">
+        <span data-me="avatar" data-presence="online"></span>
+        <a class="me-info" href="app.js">
+          <span class="me-name" data-me="name">Alex Carter</span>
+          <span class="me-status">Workspace admin</span>
+        </a>
+        <button class="icon-btn" data-action="logout" data-tip="Sign out" aria-label="Sign out">
+          <svg class="ic" aria-hidden="true"><use href="#i-logout"></use></svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- ════════ MAIN ════════ -->
+    <main class="dash-main">
+      <header class="dash-topbar" id="overviewSection">
+        <button class="icon-btn bordered mobile-only" id="dashMenuBtn" aria-label="Open navigation">
+          <svg class="ic ic-lg" aria-hidden="true"><use href="#i-menu"></use></svg>
+        </button>
+        <div>
+          <h1>Workspace Analytics</h1>
+          <p>NOVA HQ · Last updated just now</p>
+        </div>
+        <div class="dash-topbar-actions">
+          <div class="input-wrap">
+            <svg class="ic" aria-hidden="true"><use href="#i-search"></use></svg>
+            <input type="search" class="input input-search" placeholder="Search dashboard…" aria-label="Search dashboard" style="width:200px">
+          </div>
+          <div class="dropdown">
+            <button class="icon-btn bordered" data-dropdown aria-label="Notifications" aria-haspopup="true" aria-expanded="false">
+              <svg class="ic" aria-hidden="true"><use href="#i-bell"></use></svg>
+              <span class="badge red" style="position:absolute;top:-4px;right:-4px">2</span>
+            </button>
+            <div class="dropdown-menu notif-menu">
+              <div class="notif-menu-head"><h4>Alerts</h4><button type="button" onclick="Toast.success('All caught up')">Mark all read</button></div>
+              <div class="notif-list">
+                <div class="notif-item unread">
+                  <span class="avatar avatar-sm" data-c="5" aria-hidden="true">⚠</span>
+                  <div><p><strong>Storage at 82%</strong> — consider upgrading your plan</p><time>26 min ago</time></div>
+                </div>
+                <div class="notif-item unread">
+                  <span class="avatar avatar-sm" data-c="2" aria-hidden="true">↗</span>
+                  <div><p><strong>Weekly report ready</strong> — message volume up 23.7%</p><time>2 h ago</time></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="icon-btn bordered" data-action="toggle-theme" aria-label="Toggle theme">
+            <svg class="ic" aria-hidden="true"><use href="#i-sun"></use></svg>
+          </button>
+          <button class="btn btn-primary btn-sm" data-demo="Exporting analytics report">
+            <svg class="ic ic-sm" aria-hidden="true"><use href="#i-download"></use></svg>
+            Export
+          </button>
+        </div>
+      </header>
+
+      <!-- Stats -->
+      <section class="stats-grid" id="statsGrid" aria-label="Key statistics"></section>
+
+      <!-- Charts row 1 -->
+      <section class="dash-grid" id="chartsSection" aria-label="Charts">
+        <article class="panel-card">
+          <div class="panel-card-head">
+            <div><h3>Messages per day</h3><p>This week · all channels</p></div>
+            <div class="flex gap-xs">
+              <button class="chip active">7d</button>
+              <button class="chip" data-demo="Switching to 30-day view">30d</button>
+              <button class="chip" data-demo="Switching to 90-day view">90d</button>
+            </div>
+          </div>
+          <div class="bar-chart" id="barChart" role="img" aria-label="Bar chart of messages sent per day this week"></div>
+        </article>
+
+        <article class="panel-card">
+          <div class="panel-card-head">
+            <div><h3>User activity</h3><p>Where time is spent</p></div>
+          </div>
+          <div class="donut-wrap">
+            <div class="donut" role="img" aria-label="Donut chart: Channels 38%, Direct messages 27%, Calls 20%, Other 15%">
+              <div class="donut-center"><strong>3,291</strong><small>active now</small></div>
+            </div>
+            <ul class="legend">
+              <li><span class="dot" style="background:#6366f1"></span> Channels <strong>38%</strong></li>
+              <li><span class="dot" style="background:#8b5cf6"></span> Direct messages <strong>27%</strong></li>
+              <li><span class="dot" style="background:#22d3ee"></span> Huddles &amp; calls <strong>20%</strong></li>
+              <li><span class="dot" style="background:rgba(148,163,184,.35)"></span> Other <strong>15%</strong></li>
+            </ul>
+          </div>
+        </article>
+      </section>
+
+      <!-- Charts row 2 -->
+      <section class="dash-grid" aria-label="Activity details">
+        <article class="panel-card">
+          <div class="panel-card-head">
+            <div><h3>Most active channels</h3><p>By messages this week</p></div>
+            <button class="btn btn-ghost btn-sm" data-demo="Opening channel analytics">View report</button>
+          </div>
+          <div class="h-bars" id="channelBars"></div>
+        </article>
+
+        <article class="panel-card">
+          <div class="panel-card-head">
+            <div><h3>Recent activity</h3><p>Workspace timeline</p></div>
+          </div>
+          <div class="timeline">
+            <div class="tl-item">
+              <span class="tl-dot green"></span>
+              <p><strong>Maya Patel</strong> created channel <strong>#launch-day</strong></p>
+              <time>14 minutes ago</time>
+            </div>
+            <div class="tl-item">
+              <span class="tl-dot"></span>
+              <p><strong>Leo Fischer</strong> uploaded <strong>perf-benchmarks-q3.pdf</strong> to #engineering</p>
+              <time>1 hour ago</time>
+            </div>
+            <div class="tl-item">
+              <span class="tl-dot pink"></span>
+              <p><strong>Inès Laurent</strong> pinned a message in <strong>#design-system</strong></p>
+              <time>3 hours ago</time>
+            </div>
+            <div class="tl-item">
+              <span class="tl-dot amber"></span>
+              <p><strong>Kenji Watanabe</strong> updated workspace permissions</p>
+              <time>Yesterday · 18:42</time>
+            </div>
+            <div class="tl-item">
+              <span class="tl-dot green"></span>
+              <p><strong>3 new members</strong> joined NOVA HQ</p>
+              <time>Yesterday · 09:15</time>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- Users table -->
+      <section class="panel-card" id="usersSection" style="margin-bottom:24px" aria-label="Member management">
+        <div class="panel-card-head">
+          <div><h3>Members</h3><p>8 people in this workspace</p></div>
+          <div class="flex items-center gap-sm" style="flex-wrap:wrap">
+            <div class="input-wrap">
+              <svg class="ic" aria-hidden="true"><use href="#i-search"></use></svg>
+              <input type="search" class="input input-search" id="userSearch" placeholder="Search members…" aria-label="Search members" style="width:190px">
+            </div>
+            <div class="select-wrap">
+              <select class="input" id="statusFilter" aria-label="Filter by status" style="padding:9px 36px 9px 14px;border-radius:var(--r-full);font-size:var(--fs-sm)">
+                <option value="all">All statuses</option>
+                <option value="online">Online</option>
+                <option value="away">Away</option>
+                <option value="dnd">Do not disturb</option>
+                <option value="offline">Offline</option>
+              </select>
+            </div>
+            <button class="btn btn-primary btn-sm" data-demo="Invite member dialog">
+              <svg class="ic ic-sm" aria-hidden="true"><use href="#i-plus"></use></svg>
+              Invite
+            </button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th scope="col">Member</th>
+                <th scope="col">Role</th>
+                <th scope="col">Team</th>
+                <th scope="col">Messages</th>
+                <th scope="col">Status</th>
+                <th scope="col"><span class="sr-only">Actions</span></th>
+              </tr>
+            </thead>
+            <tbody id="userTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- File sharing -->
+      <section class="dash-grid" id="filesSection" aria-label="File sharing">
+        <article class="panel-card">
+          <div class="panel-card-head">
+            <div><h3>Upload files</h3><p>Drag &amp; drop or browse — shared with the workspace</p></div>
+          </div>
+          <div class="dropzone" id="dropzone" role="button" tabindex="0" aria-label="Upload files: drag and drop or press Enter to browse">
+            <span class="dz-icon"><svg class="ic ic-lg" aria-hidden="true"><use href="#i-upload"></use></svg></span>
+            <strong>Drop files here or <em>browse</em></strong>
+            <small>PNG, JPG, PDF, ZIP, DOCX — up to 50MB each</small>
+          </div>
+          <input type="file" id="dzInput" multiple class="sr-only" aria-hidden="true" tabindex="-1">
+          <div id="uploadList" style="margin-top:8px"></div>
+        </article>
+
+        <article class="panel-card">
+          <div class="panel-card-head">
+            <div><h3>Recent files</h3><p>Shared across the workspace</p></div>
+            <button class="btn btn-ghost btn-sm" data-demo="Opening file browser">View all</button>
+          </div>
+
+          <div class="shared-file-row">
+            <span class="file-thumb pdf"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-file-text"></use></svg></span>
+            <span class="file-info">
+              <span class="file-name">q3-product-roadmap.pdf</span>
+              <span class="file-size">2.4 MB · Sofia Reyes · 2h ago</span>
+            </span>
+            <button class="file-dl" data-demo="Downloading q3-product-roadmap.pdf" aria-label="Download"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-download"></use></svg></button>
+            <button class="file-dl" data-demo="File deleted (demo)" aria-label="Delete" style="color:var(--danger)"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-trash"></use></svg></button>
+          </div>
+          <div class="shared-file-row">
+            <span class="file-thumb fig"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-image"></use></svg></span>
+            <span class="file-info">
+              <span class="file-name">elevation-tokens-spec.fig</span>
+              <span class="file-size">4.2 MB · Inès Laurent · 5h ago</span>
+            </span>
+            <button class="file-dl" data-demo="Downloading elevation-tokens-spec.fig" aria-label="Download"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-download"></use></svg></button>
+            <button class="file-dl" data-demo="File deleted (demo)" aria-label="Delete" style="color:var(--danger)"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-trash"></use></svg></button>
+          </div>
+          <div class="shared-file-row">
+            <span class="file-thumb doc"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-file-text"></use></svg></span>
+            <span class="file-info">
+              <span class="file-name">launch-checklist-v3.xlsx</span>
+              <span class="file-size">92 KB · Sofia Reyes · 1d ago</span>
+            </span>
+            <button class="file-dl" data-demo="Downloading launch-checklist-v3.xlsx" aria-label="Download"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-download"></use></svg></button>
+            <button class="file-dl" data-demo="File deleted (demo)" aria-label="Delete" style="color:var(--danger)"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-trash"></use></svg></button>
+          </div>
+          <div class="shared-file-row">
+            <span class="file-thumb zip"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-folder"></use></svg></span>
+            <span class="file-info">
+              <span class="file-name">assets-export.zip</span>
+              <span class="file-size">18.7 MB · Alex Carter · 2d ago</span>
+            </span>
+            <button class="file-dl" data-demo="Downloading assets-export.zip" aria-label="Download"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-download"></use></svg></button>
+            <button class="file-dl" data-demo="File deleted (demo)" aria-label="Delete" style="color:var(--danger)"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-trash"></use></svg></button>
+          </div>
+          <div class="shared-file-row">
+            <span class="file-thumb img"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-image"></use></svg></span>
+            <span class="file-info">
+              <span class="file-name">launch-key-art@2x.png</span>
+              <span class="file-size">6.1 MB · Inès Laurent · 2d ago</span>
+            </span>
+            <button class="file-dl" data-demo="Downloading launch-key-art@2x.png" aria-label="Download"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-download"></use></svg></button>
+            <button class="file-dl" data-demo="File deleted (demo)" aria-label="Delete" style="color:var(--danger)"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-trash"></use></svg></button>
+          </div>
+
+          <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border)">
+            <div class="h-bar-top" style="margin-bottom:6px">
+              <strong style="font-size:var(--fs-sm)">Storage used</strong>
+              <span class="text-2" style="font-size:var(--fs-xs)">41 GB of 50 GB</span>
+            </div>
+            <div class="progress"><div class="progress-fill done" style="width:82%"></div></div>
+          </div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <div class="backdrop" id="backdrop" aria-hidden="true"></div>
+
+  <!-- Floating quick-action -->
+  <button class="fab" data-demo="Quick create — channel, invite or upload" aria-label="Quick create">
+    <svg class="ic ic-lg" aria-hidden="true"><use href="#i-plus"></use></svg>
+  </button>
+
+  <script src="icons.js"></script>
+  <script src="app.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>

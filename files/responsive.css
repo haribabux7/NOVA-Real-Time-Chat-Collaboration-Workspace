@@ -1,0 +1,191 @@
+/* ==========================================================================
+   NOVA — responsive.css
+   Mobile-first overrides & breakpoint adaptations
+   Breakpoints: 576 · 768 · 992 · 1200 · 1400
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   ≥ 992px — show auth showcase split layout
+   -------------------------------------------------------------------------- */
+@media (min-width: 992px) {
+  .auth-page.split {
+    grid-template-columns: 1.05fr 1fr;
+  }
+  .auth-split { display: flex; }
+}
+
+/* --------------------------------------------------------------------------
+   ≤ 1400px — slightly narrower info panel
+   -------------------------------------------------------------------------- */
+@media (max-width: 1400px) {
+  :root { --panel-w: 296px; --sidebar-w: 272px; }
+}
+
+/* --------------------------------------------------------------------------
+   ≤ 1200px — info panel becomes an overlay drawer
+   -------------------------------------------------------------------------- */
+@media (max-width: 1200px) {
+  .app-shell,
+  .app-shell.panel-open {
+    grid-template-columns: var(--rail-w) var(--sidebar-w) 1fr;
+  }
+  .app-shell.sidebar-collapsed,
+  .app-shell.sidebar-collapsed.panel-open {
+    grid-template-columns: var(--rail-w) 0 1fr;
+  }
+  .info-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(var(--panel-w), 86vw);
+    transform: translateX(105%);
+    transition: transform var(--t-med);
+    z-index: calc(var(--z-overlay) + 1);
+    box-shadow: var(--shadow-lg);
+    border-left: 1px solid var(--border-strong);
+  }
+  .app-shell.panel-open .info-panel { transform: none; }
+
+  .dash-grid,
+  .dash-grid-3 { grid-template-columns: 1fr 1fr; }
+
+  .profile-grid { grid-template-columns: 300px 1fr; }
+}
+
+/* --------------------------------------------------------------------------
+   ≤ 992px — sidebar (incl. rail) becomes a slide-in drawer
+   -------------------------------------------------------------------------- */
+@media (max-width: 992px) {
+  .app-shell,
+  .app-shell.panel-open,
+  .app-shell.sidebar-collapsed,
+  .app-shell.sidebar-collapsed.panel-open {
+    grid-template-columns: 1fr;
+  }
+
+  .rail,
+  .sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    z-index: calc(var(--z-overlay) + 2);
+    transform: translateX(-110%);
+    transition: transform var(--t-med);
+  }
+  .rail { left: 0; width: var(--rail-w); }
+  .sidebar {
+    left: var(--rail-w);
+    width: min(var(--sidebar-w), calc(92vw - var(--rail-w)));
+    box-shadow: var(--shadow-lg);
+    border-right: 1px solid var(--border-strong) !important;
+  }
+  .app-shell.mobile-nav-open .rail,
+  .app-shell.mobile-nav-open .sidebar { transform: none; }
+
+  .mobile-only { display: inline-grid !important; }
+  #sidebarToggle { display: none !important; }
+  .msg-search { display: none; }
+  .member-count span.mc-label { display: none; }
+  .msg-body { max-width: 86%; }
+
+  .dash-shell { grid-template-columns: 1fr; }
+  .dash-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 262px;
+    transform: translateX(-110%);
+    transition: transform var(--t-med);
+    z-index: calc(var(--z-overlay) + 2);
+    box-shadow: var(--shadow-lg);
+  }
+  .dash-shell.mobile-nav-open .dash-nav { transform: none; }
+  .dash-main { padding: 20px 18px 44px; }
+
+  .profile-grid { grid-template-columns: 1fr; }
+  .auth-showcase { display: none; }
+}
+
+/* --------------------------------------------------------------------------
+   ≤ 768px — tablets / large phones
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  :root { --header-h: 58px; }
+
+  .chat-window { padding: 14px 12px 8px; }
+  .composer-wrap { padding: 4px 10px 12px; }
+  .chat-header { padding: 0 10px; gap: 8px; }
+  .chat-title .ch-symbol { width: 34px; height: 34px; }
+  .chat-title-text p { display: none; }
+  .member-count { display: none; }
+  .chat-header-actions .hide-sm { display: none; }
+
+  .msg-body { max-width: 92%; }
+  .msg-actions { right: 6px; }
+  .msg-image { max-width: 270px; }
+  .file-card { max-width: 100%; }
+
+  .dash-grid,
+  .dash-grid-3 { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .donut-wrap { flex-direction: column; align-items: flex-start; }
+
+  .profile-head { padding: 0 10px; gap: 14px; }
+  .profile-avatar-xl { width: 108px; height: 108px; margin-top: -10px; }
+  .profile-cover { height: 180px; }
+  .profile-main { padding: 18px 14px 50px; }
+
+  .auth-card { padding: 28px 22px; border-radius: var(--r-lg); }
+  .form-row-2 { grid-template-columns: 1fr; }
+  .social-row { grid-template-columns: 1fr; }
+  .social-btn { flex-direction: row; }
+
+  .modal-foot { flex-direction: column-reverse; }
+  .modal-foot .btn { width: 100%; }
+
+  .scroll-fab { right: 14px; bottom: 104px; }
+  .emoji-picker { left: 10px; }
+}
+
+/* --------------------------------------------------------------------------
+   ≤ 576px — small phones
+   -------------------------------------------------------------------------- */
+@media (max-width: 576px) {
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .stat-value { font-size: var(--fs-2xl); }
+  .dash-topbar h1 { font-size: var(--fs-xl); }
+  .dash-topbar .input-search { width: 100%; }
+  .dash-topbar-actions { width: 100%; margin-left: 0; }
+  .dash-topbar-actions .input-wrap { flex: 1; }
+
+  .chat-title-text h2 { font-size: var(--fs-base); }
+  .toast-stack { top: auto; bottom: 14px; }
+  .emoji-grid { grid-template-columns: repeat(7, 1fr); }
+
+  .profile-stats-row strong { font-size: var(--fs-lg); }
+  .profile-head-actions { width: 100%; }
+  .profile-head-actions .btn { flex: 1; }
+
+  .showcase-stats { gap: 20px; }
+}
+
+/* --------------------------------------------------------------------------
+   Short viewports (landscape phones)
+   -------------------------------------------------------------------------- */
+@media (max-height: 540px) {
+  .emoji-grid { max-height: 130px; }
+  .auth-main { padding: 20px 16px; }
+  .auth-card { padding: 22px; }
+}
+
+/* --------------------------------------------------------------------------
+   Print
+   -------------------------------------------------------------------------- */
+@media print {
+  .rail, .sidebar, .info-panel, .composer-wrap, .fab,
+  .toast-stack, .chat-header-actions, .dash-nav { display: none !important; }
+  .app-shell, .dash-shell { display: block; }
+  body { background: #fff; color: #000; }
+}

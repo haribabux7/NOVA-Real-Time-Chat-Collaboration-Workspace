@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Create your free NOVA account — real-time chat & collaboration for modern teams.">
+  <meta name="theme-color" content="#0F172A">
+  <title>Create account — NOVA</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="components.css">
+  <link rel="stylesheet" href="responsive.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%236366F1'/%3E%3Cpath d='M20 44V20l24 24V20' stroke='white' stroke-width='6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+
+  <script src="theme.js"></script>
+</head>
+<body>
+  <div class="orbs" aria-hidden="true">
+    <span class="orb orb-1"></span><span class="orb orb-2"></span><span class="orb orb-3"></span>
+  </div>
+
+  <div class="auth-page split">
+    <aside class="auth-split auth-showcase" aria-hidden="true">
+      <div class="showcase-quote">
+        <h2>Join thousands of teams<br><span class="text-gradient">already shipping with NOVA.</span></h2>
+        <p>Free for small teams. No credit card required. Set up your workspace in under two minutes.</p>
+        <div class="showcase-stats">
+          <div><strong class="text-gradient">2 min</strong><small>Average setup</small></div>
+          <div><strong class="text-gradient">Free</strong><small>Up to 10 seats</small></div>
+          <div><strong class="text-gradient">SOC 2</strong><small>Type II certified</small></div>
+        </div>
+      </div>
+      <div class="float-card float-card-1">
+        <span class="avatar" data-c="3">SR</span>
+        <span class="fc-text"><strong>Sofia Reyes</strong><small>created #launch-day 🚀</small></span>
+      </div>
+      <div class="float-card float-card-2">
+        <span class="avatar" data-c="6">KW</span>
+        <span class="fc-text"><strong>Kenji Watanabe</strong><small>joined your workspace</small></span>
+      </div>
+      <div class="float-card float-card-3">
+        <span class="avatar" data-c="7">ZA</span>
+        <span class="fc-text"><strong>Zara Ahmed</strong><small>shared 3 files with you</small></span>
+      </div>
+    </aside>
+
+    <main class="auth-main">
+      <button class="icon-btn bordered auth-theme-btn" data-action="toggle-theme" aria-label="Toggle theme">
+        <svg class="ic" aria-hidden="true"><use href="#i-sun"></use></svg>
+      </button>
+
+      <div class="auth-card wide">
+        <a class="auth-logo" href="../index.html">
+          <span class="logo-mark"><svg class="ic ic-lg" aria-hidden="true"><use href="#i-zap"></use></svg></span>
+          NOVA
+        </a>
+
+        <header class="auth-head">
+          <h1>Create your account</h1>
+          <p>Start collaborating with your team in minutes.</p>
+        </header>
+
+        <form class="auth-form" id="registerForm" novalidate>
+          <div class="avatar-upload">
+            <div class="upload-circle" id="avatarCircle" role="button" tabindex="0" aria-label="Upload profile photo">
+              <svg class="ic ic-lg" aria-hidden="true"><use href="#i-camera"></use></svg>
+            </div>
+            <div>
+              <strong>Profile photo</strong>
+              <p class="up-hint">PNG or JPG, up to 5MB. You can change this later.</p>
+            </div>
+            <input type="file" id="avatarInput" accept="image/*" class="sr-only" aria-hidden="true" tabindex="-1">
+          </div>
+
+          <div class="form-row-2">
+            <div class="field">
+              <label for="regName">Full name <span class="req">*</span></label>
+              <div class="input-wrap">
+                <svg class="ic" aria-hidden="true"><use href="#i-user"></use></svg>
+                <input class="input" id="regName" type="text" autocomplete="name" placeholder="Alex Carter" required>
+              </div>
+              <span class="field-error"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-alert"></use></svg> Please enter your name</span>
+            </div>
+            <div class="field">
+              <label for="regUsername">Username <span class="req">*</span></label>
+              <div class="input-wrap">
+                <svg class="ic" aria-hidden="true"><use href="#i-at"></use></svg>
+                <input class="input" id="regUsername" type="text" autocomplete="username" placeholder="alexcarter" required>
+              </div>
+              <span class="field-error"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-alert"></use></svg> 3–20 letters, numbers or underscores</span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="regEmail">Work email <span class="req">*</span></label>
+            <div class="input-wrap">
+              <svg class="ic" aria-hidden="true"><use href="#i-mail"></use></svg>
+              <input class="input" id="regEmail" type="email" autocomplete="email" placeholder="you@company.com" required>
+            </div>
+            <span class="field-error"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-alert"></use></svg> Please enter a valid email address</span>
+          </div>
+
+          <div class="form-row-2">
+            <div class="field">
+              <label for="regPassword">Password <span class="req">*</span></label>
+              <div class="input-wrap">
+                <svg class="ic" aria-hidden="true"><use href="#i-lock"></use></svg>
+                <input class="input has-trailing" id="regPassword" type="password" autocomplete="new-password" placeholder="8+ characters" required>
+                <button type="button" class="trailing-btn" data-toggle-password="regPassword" aria-label="Show password">
+                  <svg class="ic" aria-hidden="true"><use href="#i-eye"></use></svg>
+                </button>
+              </div>
+              <div class="pw-strength" id="pwStrength" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+              <p class="pw-hint" id="pwHint">Use 8+ chars with a mix of letters, numbers &amp; symbols</p>
+              <span class="field-error"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-alert"></use></svg> Minimum 8 characters</span>
+            </div>
+            <div class="field">
+              <label for="regConfirm">Confirm password <span class="req">*</span></label>
+              <div class="input-wrap">
+                <svg class="ic" aria-hidden="true"><use href="#i-shield"></use></svg>
+                <input class="input has-trailing" id="regConfirm" type="password" autocomplete="new-password" placeholder="Repeat password" required>
+                <button type="button" class="trailing-btn" data-toggle-password="regConfirm" aria-label="Show password">
+                  <svg class="ic" aria-hidden="true"><use href="#i-eye"></use></svg>
+                </button>
+              </div>
+              <span class="field-error"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-alert"></use></svg> Passwords don’t match</span>
+            </div>
+          </div>
+
+          <label class="checkbox">
+            <input type="checkbox" id="regTerms">
+            <span class="box"><svg class="ic" aria-hidden="true"><use href="#i-check"></use></svg></span>
+            <span>I agree to the <a href="#" data-demo="Terms of Service">Terms of Service</a> and <a href="#" data-demo="Privacy Policy">Privacy Policy</a></span>
+          </label>
+
+          <button type="submit" class="btn btn-primary btn-lg btn-block">
+            <svg class="ic" aria-hidden="true"><use href="#i-zap"></use></svg>
+            Create account
+          </button>
+        </form>
+
+        <p class="auth-foot">Already have an account? <a href="../index.html">Sign in</a></p>
+      </div>
+    </main>
+  </div>
+
+  <script src="icons.js"></script>
+  <script src="app.js"></script>
+  <script src="auth.js"></script>
+</body>
+</html>
