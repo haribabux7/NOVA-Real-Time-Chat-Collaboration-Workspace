@@ -1,4 +1,3 @@
-[5.md](https://github.com/user-attachments/files/29462566/5.md)
 # NOVA — Real-Time Chat & Collaboration Workspace
 
 > A modern, Slack-inspired team workspace built entirely with vanilla **HTML, CSS, and JavaScript** — no frameworks, no build step, no backend required.
@@ -481,11 +480,12 @@ in the Software without restriction...
 
 **HARI BABU C H**
 
-- **Role:** Frontend Developer | Data Analyst
-- **GitHub:** [github.com/haribabux7](https://github.com/haribabux7)
-- **LinkedIn:** [linkedin.com/in/haribabux7](https://www.linkedin.com/in/haribabux7)
-- **Portfolio:** [haribabu.me](https://www.haribabu.me)
-- **Email:** [haribabuc458@gmail.com](mailto:haribabuc458@gmail.com)
+Frontend Developer | Data Analyst | Chennai, India
+
+- 🌐 Portfolio: [https://www.haribabu.me](https://www.haribabu.me)
+- 💼 LinkedIn: [https://www.linkedin.com/in/haribabux8](https://www.linkedin.com/in/haribabux8)
+- 🐙 GitHub: [https://github.com/haribabux8](https://github.com/haribabux8)
+- 📧 Email: [haribabuc458@gmail.com](mailto:haribabuc458@gmail.com)
 
 ---
 
@@ -499,14 +499,3 @@ in the Software without restriction...
 - Every open-source maintainer whose blog posts and CodePens shaped this build.
 
 ---
-
-## 📌 Project Information
-
-| Field | Value |
-|-------|-------|
-| **Project Name** | NOVA — Real-Time Chat & Collaboration Workspace |
-| **Version** | 1.0.0 |
-| **Designed Date** | November 2025 |
-| **Author** | Hari Babu C H |
-| **License** | MIT |
-| **Status** | ✅ Stable |
